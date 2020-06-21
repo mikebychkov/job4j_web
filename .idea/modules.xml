@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Ch_01_Mulithreading/Ch_01_Mulithreading.iml" filepath="$PROJECT_DIR$/Ch_01_Mulithreading/Ch_01_Mulithreading.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ch_02_ServletJSP/Ch_02_ServletJSP.iml" filepath="$PROJECT_DIR$/Ch_02_ServletJSP/Ch_02_ServletJSP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ch_03_Hiberrnate/Ch_03_Hiberrnate.iml" filepath="$PROJECT_DIR$/Ch_03_Hiberrnate/Ch_03_Hiberrnate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ch_04_Spring/Ch_04_Spring.iml" filepath="$PROJECT_DIR$/Ch_04_Spring/Ch_04_Spring.iml" />
+      <module fileurl="file://$PROJECT_DIR$/job4j_web.iml" filepath="$PROJECT_DIR$/job4j_web.iml" />
+    </modules>
+  </component>
+</project>
