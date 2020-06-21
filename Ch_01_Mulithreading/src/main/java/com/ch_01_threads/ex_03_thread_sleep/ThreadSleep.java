@@ -14,7 +14,12 @@ public class ThreadSleep {
                     }
                 }
         );
+        System.out.println(thread.getState());
         thread.start();
+        System.out.println(thread.getState());
         System.out.println("Main");
+        while (thread.getState() != Thread.State.TERMINATED) {
+            System.out.println(thread.getState());
+        }
     }
 }
