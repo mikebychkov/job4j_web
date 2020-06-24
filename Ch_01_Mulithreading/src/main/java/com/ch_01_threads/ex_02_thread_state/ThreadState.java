@@ -17,8 +17,11 @@ public class ThreadState {
         );
         second.start();
 
-        while (first.getState() != Thread.State.TERMINATED && second.getState() != Thread.State.TERMINATED) {
-            Thread.sleep(100);
+        while (first.getState() != Thread.State.TERMINATED) {
+            Thread.sleep(10);
+        }
+        while (second.getState() != Thread.State.TERMINATED) {
+            Thread.sleep(10);
         }
         System.out.println("All jobs are complete!");
     }
