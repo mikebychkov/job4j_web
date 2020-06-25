@@ -4,9 +4,9 @@ import java.io.*;
 
 public class ParseFile {
 
-    private File file;
+    private final File file;
 
-    public ParseFile(File file) {
+    public ParseFile(final File file) {
         this.file = file;
     }
 
