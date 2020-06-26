@@ -16,17 +16,18 @@ public class UserStorage {
     }
 
     public synchronized boolean add(User user) {
-        users.putIfAbsent(user.getId(), user);
+        users.putIfAbsent(user.getId(), User.of(user.getId(), user.getAmount()));
         return true;
     }
 
     public synchronized boolean update(User user) {
-        users.replace(user.getId(), user);
+        users.replace(user.getId(), User.of(user.getId(), user.getAmount()));
         return true;
     }
 
     public synchronized boolean delete(User user) {
-        return users.remove(user.getId(), user);
+        users.remove(user.getId());
+        return true;
     }
 
     public synchronized boolean transfer(int fromId, int toId, int amount) {

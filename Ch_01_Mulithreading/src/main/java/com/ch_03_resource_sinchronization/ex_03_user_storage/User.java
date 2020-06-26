@@ -18,6 +18,10 @@ public class User {
         this.amount = amount;
     }
 
+    public static User of(int id, int amount) {
+        return new User(id, amount);
+    }
+
     public int getId() {
         return id;
     }
