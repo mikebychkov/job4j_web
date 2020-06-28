@@ -12,49 +12,59 @@ public class SimpleBlockingQueue<T> {
     @GuardedBy("this")
     private volatile Queue<T> queue = new LinkedList<>();
     private final int bound;
+    private final Object monitor = new Object();
 
     public SimpleBlockingQueue(int bound) {
         this.bound = bound;
     }
 
-    public synchronized int size() {
-        return queue.size();
-    }
-
-    public synchronized String toString() {
-        return queue.toString();
-    }
-
-    public synchronized void offer(T value) {
-        while (size() == bound) {
-            pause();
+    public int size() {
+        synchronized (monitor) {
+            return queue.size();
         }
-        queue.offer(value);
-        System.out.println(Thread.currentThread().getName() + " #offer " + value);
-        notifyStatus();
     }
 
-    public synchronized T poll() {
-        while (size() == 0) {
-            pause();
+    public String toString() {
+        synchronized (monitor) {
+            return queue.toString();
         }
-        T rsl = queue.poll();
-        System.out.println(Thread.currentThread().getName() + " #poll " + rsl);
-        notifyStatus();
-        return rsl;
     }
 
-    private void pause() {
-        try {
-            System.out.println(Thread.currentThread().getName() + " #wait");
-            this.wait();
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
+    public void offer(T value) {
+        synchronized (monitor) {
+            while (size() == bound) {
+                try {
+                    System.out.println(Thread.currentThread().getName() + " #wait");
+                    monitor.wait();
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+            queue.offer(value);
+            System.out.println(Thread.currentThread().getName() + " #offer " + value);
+            notifyStatus();
+        }
+    }
+
+    public T poll() {
+        synchronized (monitor) {
+            while (size() == 0) {
+                try {
+                    System.out.println(Thread.currentThread().getName() + " #wait");
+                    monitor.wait();
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+            T rsl = queue.poll();
+            System.out.println(Thread.currentThread().getName() + " #poll " + rsl);
+            notifyStatus();
+            return rsl;
         }
     }
 
     private void notifyStatus() {
         System.out.println(Thread.currentThread().getName() + " #notifyAll");
-        this.notifyAll();
+        monitor.notifyAll();
     }
 }

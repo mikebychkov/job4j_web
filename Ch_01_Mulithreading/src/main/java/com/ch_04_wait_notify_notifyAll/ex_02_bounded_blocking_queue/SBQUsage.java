@@ -34,7 +34,6 @@ public class SBQUsage {
         @Override
         public void run() {
             int iter = 0;
-            System.out.println("Size: " + sbq.size());
             while (!Thread.currentThread().isInterrupted() || sbq.size() > 0) {
                 System.out.println("=".repeat(5) + Thread.currentThread().getName() + " " + iter++);
                 Integer rsl = sbq.poll();
