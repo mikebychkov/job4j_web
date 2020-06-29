@@ -30,7 +30,7 @@ public class SimpleBlockingQueueTest {
                     @Override
                     public void run() {
                         Integer pollRsl;
-                        while ((pollRsl = sbq.poll()) != null) {
+                        while ((pollRsl = sbq.poll()) != null || !Thread.currentThread().isInterrupted()) {
                             rsl.add(pollRsl);
                         }
                     }

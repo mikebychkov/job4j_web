@@ -33,7 +33,7 @@ public class SBQUsage {
         @Override
         public void run() {
             Integer pollRsl;
-            while ((pollRsl = sbq.poll()) != null) {
+            while ((pollRsl = sbq.poll()) != null || !Thread.currentThread().isInterrupted()) {
                 System.out.printf("Poll %s%n", pollRsl);
             }
         }
