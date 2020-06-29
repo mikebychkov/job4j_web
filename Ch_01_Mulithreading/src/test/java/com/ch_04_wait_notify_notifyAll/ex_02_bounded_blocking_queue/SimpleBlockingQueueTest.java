@@ -29,8 +29,9 @@ public class SimpleBlockingQueueTest {
                 new Runnable() {
                     @Override
                     public void run() {
-                        while (!Thread.currentThread().isInterrupted() || sbq.size() > 0) {
-                            rsl.add(sbq.poll());
+                        Integer pollRsl;
+                        while ((pollRsl = sbq.poll()) != null) {
+                            rsl.add(pollRsl);
                         }
                     }
                 },

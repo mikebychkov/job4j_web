@@ -12,59 +12,50 @@ public class SimpleBlockingQueue<T> {
     @GuardedBy("this")
     private volatile Queue<T> queue = new LinkedList<>();
     private final int bound;
-    private final Object monitor = new Object();
 
     public SimpleBlockingQueue(int bound) {
         this.bound = bound;
     }
 
     public int size() {
-        synchronized (monitor) {
+        synchronized (this) {
             return queue.size();
         }
     }
 
     public String toString() {
-        synchronized (monitor) {
+        synchronized (this) {
             return queue.toString();
         }
     }
 
     public void offer(T value) {
-        synchronized (monitor) {
+        synchronized (this) {
             while (size() == bound) {
                 try {
-                    System.out.println(Thread.currentThread().getName() + " #wait");
-                    monitor.wait();
+                    this.wait();
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
             }
             queue.offer(value);
-            System.out.println(Thread.currentThread().getName() + " #offer " + value);
-            notifyStatus();
+            this.notifyAll();
         }
     }
 
     public T poll() {
-        synchronized (monitor) {
+        synchronized (this) {
             while (size() == 0) {
                 try {
-                    System.out.println(Thread.currentThread().getName() + " #wait");
-                    monitor.wait();
+                    this.wait();
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
+                    return null;
                 }
             }
             T rsl = queue.poll();
-            System.out.println(Thread.currentThread().getName() + " #poll " + rsl);
-            notifyStatus();
+            this.notifyAll();
             return rsl;
         }
-    }
-
-    private void notifyStatus() {
-        System.out.println(Thread.currentThread().getName() + " #notifyAll");
-        monitor.notifyAll();
     }
 }

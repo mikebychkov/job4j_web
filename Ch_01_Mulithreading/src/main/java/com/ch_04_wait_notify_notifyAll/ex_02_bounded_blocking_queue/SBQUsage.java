@@ -15,7 +15,6 @@ public class SBQUsage {
         @Override
         public void run() {
             for (int i = 0; i < 5; i++) {
-                System.out.println("=".repeat(5) + Thread.currentThread().getName() + " " + i);
                 sbq.offer(i);
             }
         }
@@ -33,10 +32,9 @@ public class SBQUsage {
 
         @Override
         public void run() {
-            int iter = 0;
-            while (!Thread.currentThread().isInterrupted() || sbq.size() > 0) {
-                System.out.println("=".repeat(5) + Thread.currentThread().getName() + " " + iter++);
-                Integer rsl = sbq.poll();
+            Integer pollRsl;
+            while ((pollRsl = sbq.poll()) != null) {
+                System.out.printf("Poll %s%n", pollRsl);
             }
         }
     }
