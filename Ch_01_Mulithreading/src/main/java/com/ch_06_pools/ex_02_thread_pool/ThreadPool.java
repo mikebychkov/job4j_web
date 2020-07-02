@@ -23,7 +23,7 @@ public class ThreadPool {
         this.notifyAll();
     }
 
-    public synchronized void shutdown() {
+    public void shutdown() {
         for (Thread t : threads) {
             t.interrupt();
         }
