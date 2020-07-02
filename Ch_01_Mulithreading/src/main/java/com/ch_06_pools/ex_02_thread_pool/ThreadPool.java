@@ -18,17 +18,12 @@ public class ThreadPool {
         }
     }
 
-    public void work(Runnable job) {
+    public synchronized void work(Runnable job) {
         tasks.offer(job);
-        try {
-            this.notifyAll();
-        } catch (IllegalMonitorStateException e) {
-            e.printStackTrace();
-            shutdown();
-        }
+        this.notifyAll();
     }
 
-    public void shutdown() {
+    public synchronized void shutdown() {
         for (Thread t : threads) {
             t.interrupt();
         }

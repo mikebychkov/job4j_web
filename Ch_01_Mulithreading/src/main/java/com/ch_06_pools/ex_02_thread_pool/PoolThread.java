@@ -21,7 +21,9 @@ public class PoolThread implements Runnable {
         while (!Thread.currentThread().isInterrupted() || tasks.size() > 0) {
             while ((r = tasks.poll()) == null) {
                 try {
-                    monitor.wait();
+                    synchronized (monitor) {
+                        monitor.wait();
+                    }
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                     return;
@@ -32,7 +34,7 @@ public class PoolThread implements Runnable {
             try {
                 t1.join();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Thread.currentThread().interrupt();
             }
         }
     }
