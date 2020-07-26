@@ -33,14 +33,13 @@ public class ProcessNode implements Runnable {
                 char c = (char) in;
                 if (c == '{') {
                     openDataRead = true;
-                    continue;
+                }
+                if (openDataRead) {
+                    sb.append(c);
                 }
                 if (c == '}') {
                     openDataRead = false;
                     return purl.getParser().parse(sb.toString());
-                }
-                if (openDataRead) {
-                    sb.append(c);
                 }
             }
         } catch (IOException e) {

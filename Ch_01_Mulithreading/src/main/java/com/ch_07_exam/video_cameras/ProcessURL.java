@@ -49,7 +49,9 @@ public class ProcessURL {
                 }
                 if (c == '{') {
                     openDataRead = true;
-                    continue;
+                }
+                if (openDataRead) {
+                    sb.append(c);
                 }
                 if (c == '}') {
                     openDataRead = false;
@@ -59,10 +61,6 @@ public class ProcessURL {
                     pool.submit(new ProcessNode(m, this));
 
                     sb.delete(0, sb.length());
-                    continue;
-                }
-                if (openDataRead) {
-                    sb.append(c);
                 }
             }
         } catch (IOException e) {
