@@ -1,0 +1,13 @@
+<hibernate-mapping package="com.ch_02_mapping.ex_05_cars_and_owners_xml">
+    <class name="OwnerHistoryXML" table="owner_history_xml">
+        <id name="id" type="int" column="id">
+            <generator class="native"/>
+        </id>
+        <many-to-one name="driver" class="DriverXML">
+            <column name="driver_id"/>
+        </many-to-one>
+        <many-to-one name="car" class="CarXML">
+            <column name="car_id"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

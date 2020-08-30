@@ -26,5 +26,10 @@
         <mapping class="com.ch_02_mapping.ex_04_cars_and_owners.Driver" />
         <mapping class="com.ch_02_mapping.ex_04_cars_and_owners.OwnerHistory" />
 
+        <mapping resource="Engine.hbm.xml" />
+        <mapping resource="Car.hbm.xml" />
+        <mapping resource="Driver.hbm.xml" />
+        <mapping resource="OwnerHistory.hbm.xml" />
+
     </session-factory>
 </hibernate-configuration>

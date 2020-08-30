@@ -1,0 +1,8 @@
+<hibernate-mapping package="com.ch_02_mapping.ex_05_cars_and_owners_xml">
+    <class name="EngineXML" table="engines_xml">
+        <id name="id" type="int" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="name" type="string" column="name"/>
+    </class>
+</hibernate-mapping>
