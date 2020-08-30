@@ -20,5 +20,11 @@
         <mapping class="com.ch_02_mapping.ex_02_to_many.CarType2" />
         <mapping class="com.ch_02_mapping.ex_03_to_many_bidirectional.Car3" />
         <mapping class="com.ch_02_mapping.ex_03_to_many_bidirectional.CarType3" />
+
+        <mapping class="com.ch_02_mapping.ex_04_cars_and_owners.Engine" />
+        <mapping class="com.ch_02_mapping.ex_04_cars_and_owners.Car" />
+        <mapping class="com.ch_02_mapping.ex_04_cars_and_owners.Driver" />
+        <mapping class="com.ch_02_mapping.ex_04_cars_and_owners.OwnerHistory" />
+
     </session-factory>
 </hibernate-configuration>
