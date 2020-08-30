@@ -12,10 +12,10 @@ import java.util.List;
 
 public class Main3 {
 
-    private static final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
-    private static final SessionFactory sf = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+    private static final StandardServiceRegistry REG = new StandardServiceRegistryBuilder().configure().build();
+    private static final SessionFactory SF = new MetadataSources(REG).buildMetadata().buildSessionFactory();
 
-    private static final Logger logger = LogManager.getLogger(Main3.class);
+    private static final Logger LOGGER = LogManager.getLogger(Main3.class);
 
     public static void main(String[] args) {
 
@@ -29,13 +29,13 @@ public class Main3 {
         type.addCar(car);
         type.addCar(car2);
 
-        Session session = sf.openSession();
+        Session session = SF.openSession();
         session.beginTransaction();
         session.save(type);
         session.getTransaction().commit();
         session.close();
 
-        session = sf.openSession();
+        session = SF.openSession();
         session.beginTransaction();
 
         System.out.println("=".repeat(50));

@@ -12,10 +12,10 @@ import java.util.List;
 
 public class Main {
 
-    private static final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
-    private static final SessionFactory sf = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+    private static final StandardServiceRegistry REG = new StandardServiceRegistryBuilder().configure().build();
+    private static final SessionFactory SF = new MetadataSources(REG).buildMetadata().buildSessionFactory();
 
-    private static final Logger logger = LogManager.getLogger(Main.class);
+    private static final Logger LOGGER = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
 
@@ -48,7 +48,7 @@ public class Main {
 
         // SAVE MODELS
 
-        Session session = sf.openSession();
+        Session session = SF.openSession();
         session.beginTransaction();
         session.save(eng);
         session.save(car1);
@@ -60,7 +60,7 @@ public class Main {
 
         // READ MODELS
 
-        session = sf.openSession();
+        session = SF.openSession();
         session.beginTransaction();
 
         List<CarXML> carList = session.createQuery("FROM com.ch_02_mapping.ex_05_cars_and_owners_xml.CarXML").list();
