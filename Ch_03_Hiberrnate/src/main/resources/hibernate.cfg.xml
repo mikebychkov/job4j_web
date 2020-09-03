@@ -31,5 +31,7 @@
         <mapping resource="Driver.hbm.xml" />
         <mapping resource="OwnerHistory.hbm.xml" />
 
+        <mapping class="com.ch_03_hql.ex_01_hql.Candidate" />
+
     </session-factory>
 </hibernate-configuration>
